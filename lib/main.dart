@@ -1,3 +1,4 @@
+import 'package:first_layout/about.dart';
 import 'package:flutter/material.dart'; // import Flutter Material library
 
 void main() {
@@ -8,38 +9,49 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) { // build method to create the widget tree
-    return const MaterialApp( // create a Material app with const arguments
+  Widget build(BuildContext context) {
+    // build method to create the widget tree
+    return const MaterialApp(
+      // create a Material app with const arguments
       title: 'We are Pard', // set the app's title
       home: MyHomePage(), // set the app's home page
     );
   }
 }
 
-class MyHomePage extends StatefulWidget { // create a stateful widget
+class MyHomePage extends StatefulWidget {
+  // create a stateful widget
   const MyHomePage({Key? key}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState(); // create a state object
 }
 
-class _MyHomePageState extends State<MyHomePage> { // create a state object for the home page
+class _MyHomePageState extends State<MyHomePage> {
+  // create a state object for the home page
   bool _isFavorited = false; // initialize a boolean variable
 
-  void _toggleFavorite() { // function to toggle the favorite icon
-    setState(() { // set state to update the icon
+  void _toggleFavorite() {
+    // function to toggle the favorite icon
+    setState(() {
+      // set state to update the icon
       _isFavorited = !_isFavorited; // toggle the value of _isFavorited
     });
   }
 
   @override
-  Widget build(BuildContext context) { // build method to create the widget tree
-    Widget titleSection = Container( // create a container widget
+  Widget build(BuildContext context) {
+    // build method to create the widget tree
+    Widget titleSection = Container(
+      // create a container widget
       padding: const EdgeInsets.all(32), // set padding for the container
-      child: Row( // create a row widget
+      child: Row(
+        // create a row widget
         children: [
-          Expanded( // create an expanded widget to fill remaining space
-            child: Column( // create a column widget
+          Expanded(
+            // create an expanded widget to fill remaining space
+            child: Column(
+              // create a column widget
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
@@ -60,24 +72,35 @@ class _MyHomePageState extends State<MyHomePage> { // create a state object for 
               ],
             ),
           ),
-          IconButton( // create an icon button widget
-            icon: _isFavorited ? Icon(Icons.star) : Icon(Icons.star_border), // display a star icon if _isFavorited is true, otherwise display an empty star icon
+          IconButton(
+            // create an icon button widget
+            icon: _isFavorited
+                ? Icon(Icons.star)
+                : Icon(Icons
+                    .star_border), // display a star icon if _isFavorited is true, otherwise display an empty star icon
             color: Colors.red[500], // set the icon color to red
-            onPressed: _toggleFavorite, // call the _toggleFavorite function when the button is pressed
+            onPressed:
+                _toggleFavorite, // call the _toggleFavorite function when the button is pressed
           ),
           const Text('41'), // display the text "41"
         ],
       ),
     );
 
-    Color color = Theme.of(context).primaryColor; // get the primary color from the app's theme
+    Color color = Theme.of(context)
+        .primaryColor; // get the primary color from the app's theme
 
-    Widget buttonSection = Row( // create a row widget
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly, // evenly space the children
+    Widget buttonSection = Row(
+      // create a row widget
+      mainAxisAlignment:
+          MainAxisAlignment.spaceEvenly, // evenly space the children
       children: [
-        _buildButtonColumn(color, Icons.call, 'CALL'), // create a button column widget
-        _buildButtonColumn(color, Icons.near_me, 'ROUTE'), // create a button column widget
-        _buildButtonColumn(color, Icons.share, 'SHARE'), // create a button column widget
+        _buildButtonColumn(
+            color, Icons.call, 'CALL'), // create a button column widget
+        _buildButtonColumn(
+            color, Icons.near_me, 'ROUTE'), // create a button column widget
+        _buildButtonColumn(
+            color, Icons.share, 'SHARE'), // create a button column widget
       ],
     );
 
@@ -89,14 +112,25 @@ class _MyHomePageState extends State<MyHomePage> { // create a state object for 
       ),
     );
 
-    Widget _divider = Divider(thickness: 1, height: 1, color: Colors.grey); // 구분선
+    Widget _divider =
+        Divider(thickness: 1, height: 1, color: Colors.grey); // 구분선
 
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
           title: const Text('We are PARD'),
+          actions: [IconButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => About()),
+            );
+          }, 
+          icon: Icon(Icons.door_back_door)
+          )
+         ],
         ),
-        body: ListView( 
+        body: ListView(
           children: [
             Image.asset(
               'assets/img.jpeg',
@@ -117,7 +151,7 @@ class _MyHomePageState extends State<MyHomePage> { // create a state object for 
 
   Column _buildButtonColumn(Color color, IconData icon, String label) {
     return Column(
-      mainAxisSize: MainAxisSize.min, // 크기 만큼만 차지 
+      mainAxisSize: MainAxisSize.min, // 크기 만큼만 차지
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Icon(icon, color: color),
